@@ -1,5 +1,7 @@
 package postgres
 
+import "KnowledgeHub/internal/models"
+
 type UserRepo struct {
 	store *Repository
 }
@@ -9,7 +11,7 @@ func (u UserRepo) CreateUser() error {
 	panic("implement me")
 }
 
-func (u UserRepo) GetUserByID(id uint) error {
+func (u UserRepo) GetUserByID(id uint) (*models.User, error) {
 	//TODO implement me
 	panic("implement me")
 }

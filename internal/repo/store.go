@@ -1,5 +1,7 @@
 package repo
 
+import "KnowledgeHub/internal/models"
+
 // Repository implement from interface Store
 type Store interface {
 	User() UserRepository
@@ -8,7 +10,7 @@ type Store interface {
 
 type UserRepository interface {
 	CreateUser() error
-	GetUserByID(id uint) error
+	GetUserByID(id uint) (*models.User, error)
 	UpdateUser() error
 	DeleteUser(id int) error
 }
