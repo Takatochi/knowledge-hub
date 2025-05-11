@@ -1,6 +1,7 @@
 package v1
 
 import (
+	_ "KnowledgeHub/docs"
 	"KnowledgeHub/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -11,6 +12,9 @@ import (
 type V1 struct {
 	l logger.LoggerInterface
 	v *validator.Validate
+}
+type entity struct {
+	Message string `json:"message" example:"success"`
 }
 
 // @Summary     Show history
@@ -24,8 +28,7 @@ type V1 struct {
 // @Router      /translation/history [get]
 func (r *V1) history(ctx *gin.Context) {
 
-	// Повертаємо історію перекладів зі статусом 200
 	ctx.JSON(http.StatusOK, gin.H{
-		"message": "success",
+		"data": entity{"Server is running"},
 	})
 }

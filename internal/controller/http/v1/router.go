@@ -1,6 +1,7 @@
 package v1
 
 import (
+	_ "KnowledgeHub/docs"
 	"KnowledgeHub/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"

@@ -1,4 +1,42 @@
+basePath: /v1
+definitions:
+  response.Error:
+    properties:
+      error:
+        example: message
+        type: string
+    type: object
+  v1.entity:
+    properties:
+      message:
+        example: success
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact: {}
-paths: {}
+  description: API for Knowledge Hub application
+  title: KnowledgeHub API
+  version: "1.0"
+paths:
+  /translation/history:
+    get:
+      consumes:
+      - application/json
+      description: Show all translation history
+      operationId: history
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.entity'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Error'
+      summary: Show history
+      tags:
+      - translation
 swagger: "2.0"

@@ -14,10 +14,10 @@ import (
 
 // NewRouter -.
 // Swagger spec:
-// @title       Go Clean Template API
-// @description Using a translation service as an example
+// @title       KnowledgeHub API
+// @description API for Knowledge Hub application
 // @version     1.0
-// @host        localhost
+// @host        localhost:8080
 // @BasePath    /v1
 func NewRouter(engine *gin.Engine, cfg *config.Config, l logger.LoggerInterface) {
 	// Middleware
