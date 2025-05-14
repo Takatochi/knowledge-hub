@@ -23,11 +23,12 @@ func buildPanicMessage(ctx *gin.Context, err interface{}) string {
 	return result.String()
 }
 
-func logPanic(l logger.LoggerInterface) func(ctx *gin.Context, err interface{}) {
-	return func(ctx *gin.Context, err interface{}) {
-		l.Error(buildPanicMessage(ctx, err))
-	}
-}
+// Видаляємо невикористану функцію logPanic
+// func logPanic(l logger.LoggerInterface) func(ctx *gin.Context, err interface{}) {
+//     return func(ctx *gin.Context, err interface{}) {
+//         l.Error(buildPanicMessage(ctx, err))
+//     }
+// }
 
 func Recovery(l logger.LoggerInterface) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
