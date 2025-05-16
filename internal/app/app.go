@@ -1,15 +1,16 @@
 package app
 
 import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"KnowledgeHub/config"
 	"KnowledgeHub/internal/controller/http"
 	"KnowledgeHub/pkg/httpserver"
 	"KnowledgeHub/pkg/logger"
 	"KnowledgeHub/pkg/postgres"
-	"fmt"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 // Run creates objects via constructors.
@@ -46,5 +47,4 @@ func Run(cfg *config.Config) {
 	if err != nil {
 		l.Error(fmt.Errorf("app - Run - httpServer.Shutdown: %w", err))
 	}
-
 }

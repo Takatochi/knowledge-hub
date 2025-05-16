@@ -11,7 +11,7 @@ func (u UserRepo) CreateUser() error {
 	panic("implement me")
 }
 
-func (u UserRepo) GetUserByID(id uint) (*models.User, error) {
+func (u UserRepo) GetUserByID(_ uint) (*models.User, error) {
 	//TODO implement me
 	panic("implement me")
 }
@@ -21,7 +21,7 @@ func (u UserRepo) UpdateUser() error {
 	panic("implement me")
 }
 
-func (u UserRepo) DeleteUser(id int) error {
+func (u UserRepo) DeleteUser(_ int) error {
 	//TODO implement me
 	panic("implement me")
 }

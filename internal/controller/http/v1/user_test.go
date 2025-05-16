@@ -1,15 +1,17 @@
 package v1
 
 import (
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
 	"KnowledgeHub/internal/models"
 	"KnowledgeHub/internal/repo/mocks"
 	"KnowledgeHub/internal/services"
 	"KnowledgeHub/pkg/logger"
-	"encoding/json"
+
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"net/http/httptest"
-	"testing"
 )
 
 func TestUserHandler_GetUser(t *testing.T) {

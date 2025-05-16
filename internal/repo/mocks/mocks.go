@@ -21,14 +21,14 @@ func (m *Mocks) AddUser(user *models.User) {
 	m.users[user.ID] = user
 }
 
-func (r *Mocks) User() repo.UserRepository {
-	if r.mockUserRepository != nil {
-		return r.mockUserRepository
+func (m *Mocks) User() repo.UserRepository {
+	if m.mockUserRepository != nil {
+		return m.mockUserRepository
 	}
 
-	r.mockUserRepository = &MockUserRepository{
-		store: r,
+	m.mockUserRepository = &MockUserRepository{
+		store: m,
 	}
 
-	return r.mockUserRepository
+	return m.mockUserRepository
 }

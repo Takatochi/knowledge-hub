@@ -1,19 +1,21 @@
 package v1
 
 import (
-	"KnowledgeHub/internal/services"
-	"KnowledgeHub/pkg/logger"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"KnowledgeHub/internal/services"
+	"KnowledgeHub/pkg/logger"
+
+	"github.com/gin-gonic/gin"
 )
 
 type UserHandler struct {
 	userService *services.UserService
-	logger      logger.LoggerInterface
+	logger      logger.Interface
 }
 
-func NewUserHandler(userService *services.UserService, logger logger.LoggerInterface) *UserHandler {
+func NewUserHandler(userService *services.UserService, logger logger.Interface) *UserHandler {
 	return &UserHandler{
 		userService: userService,
 		logger:      logger,

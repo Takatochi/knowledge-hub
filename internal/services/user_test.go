@@ -1,9 +1,10 @@
 package services
 
 import (
+	"testing"
+
 	"KnowledgeHub/internal/models"
 	"KnowledgeHub/internal/repo/mocks"
-	"testing"
 )
 
 func TestUserService_GetUser(t *testing.T) {

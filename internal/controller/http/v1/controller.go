@@ -1,17 +1,20 @@
 package v1
 
 import (
+	"net/http"
+
+	// Swagger documentation
 	_ "KnowledgeHub/docs"
 	"KnowledgeHub/internal/models"
 	"KnowledgeHub/pkg/logger"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"net/http"
 )
 
 // V1 -.
 type V1 struct {
-	l logger.LoggerInterface
+	l logger.Interface
 	v *validator.Validate
 }
 

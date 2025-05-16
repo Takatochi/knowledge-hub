@@ -1,15 +1,18 @@
 package http
 
 import (
+	"net/http"
+
 	"KnowledgeHub/config"
+	// Swagger documentation
 	_ "KnowledgeHub/docs"
 	"KnowledgeHub/internal/controller/http/middleware"
 	v1 "KnowledgeHub/internal/controller/http/v1"
 	"KnowledgeHub/pkg/logger"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
-	"github.com/swaggo/gin-swagger"
-	"net/http"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // NewRouter -.
@@ -19,7 +22,7 @@ import (
 // @version     1.0
 // @host        localhost:8080
 // @BasePath    /v1
-func NewRouter(engine *gin.Engine, cfg *config.Config, l logger.LoggerInterface) {
+func NewRouter(engine *gin.Engine, cfg *config.Config, l logger.Interface) {
 	// Middleware
 	engine.Use(middleware.Logger(l))
 	engine.Use(middleware.Recovery(l))

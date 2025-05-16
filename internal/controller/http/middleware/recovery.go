@@ -1,12 +1,14 @@
 package middleware
 
 import (
-	"KnowledgeHub/pkg/logger"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"runtime/debug"
 	"strings"
+
+	"KnowledgeHub/pkg/logger"
+
+	"github.com/gin-gonic/gin"
 )
 
 func buildPanicMessage(ctx *gin.Context, err interface{}) string {
@@ -23,14 +25,7 @@ func buildPanicMessage(ctx *gin.Context, err interface{}) string {
 	return result.String()
 }
 
-// Видаляємо невикористану функцію logPanic
-// func logPanic(l logger.LoggerInterface) func(ctx *gin.Context, err interface{}) {
-//     return func(ctx *gin.Context, err interface{}) {
-//         l.Error(buildPanicMessage(ctx, err))
-//     }
-// }
-
-func Recovery(l logger.LoggerInterface) gin.HandlerFunc {
+func Recovery(l logger.Interface) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
