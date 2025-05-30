@@ -1,6 +1,8 @@
 package mocks
 
 import (
+	"errors"
+
 	"KnowledgeHub/internal/models"
 )
 
@@ -26,6 +28,9 @@ func (m *MockUserRepository) UpdateUser() error {
 }
 
 func (m *MockUserRepository) DeleteUser(id int) error {
+	if id < 0 {
+		return errors.New("invalid user ID")
+	}
 	delete(m.store.users, uint(id))
 	return nil
 }

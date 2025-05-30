@@ -1,7 +1,6 @@
 package http
 
 import (
-	"KnowledgeHub/internal/services"
 	"net/http"
 
 	"KnowledgeHub/config"
@@ -9,6 +8,7 @@ import (
 	_ "KnowledgeHub/docs"
 	"KnowledgeHub/internal/controller/http/middleware"
 	v1 "KnowledgeHub/internal/controller/http/v1"
+	"KnowledgeHub/internal/services"
 	"KnowledgeHub/pkg/logger"
 
 	"github.com/gin-gonic/gin"

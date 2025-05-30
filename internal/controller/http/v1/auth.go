@@ -11,6 +11,12 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+const (
+	adminUsername = "admin"
+	adminPassword = "password"
+	adminEmail    = "admin@example.com"
+)
+
 // AuthHandler обробляє запити аутентифікації
 type AuthHandler struct {
 	jwtService  *services.JWTService
@@ -20,7 +26,11 @@ type AuthHandler struct {
 }
 
 // NewAuthHandler створює новий екземпляр AuthHandler
-func NewAuthHandler(jwtService *services.JWTService, userService *services.UserService, logger logger.Interface) *AuthHandler {
+func NewAuthHandler(
+	jwtService *services.JWTService,
+	userService *services.UserService,
+	logger logger.Interface,
+) *AuthHandler {
 	return &AuthHandler{
 		jwtService:  jwtService,
 		userService: userService,
@@ -92,7 +102,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 
 	// TODO: Тут буде логіка перевірки користувача в базі даних
 	// Поки що заглушку для демонстрації
-	if req.Username != "admin" || req.Password != "password" {
+	if req.Username != adminUsername || req.Password != adminPassword {
 		h.logger.Info("Failed login attempt for username: %s from %s", req.Username, c.ClientIP())
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": "Invalid username or password",
@@ -100,7 +110,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		return
 	}
 
-	tokenPair, err := h.jwtService.GenerateTokenPair(1, req.Username, "admin@example.com")
+	tokenPair, err := h.jwtService.GenerateTokenPair(1, req.Username, adminEmail)
 	if err != nil {
 		h.logger.Error("Failed to generate tokens: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -118,7 +128,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		User: UserInfo{
 			ID:       1,
 			Username: req.Username,
-			Email:    "admin@example.com",
+			Email:    adminEmail,
 		},
 	})
 }
@@ -148,7 +158,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 
 	// TODO: Тут буде логіка створення користувача в базі даних
 	// Поки що заглушку для демонстрації
-	if req.Username == "admin" {
+	if req.Username == adminUsername {
 		h.logger.Info("Registration attempt with existing username: %s from %s", req.Username, c.ClientIP())
 		c.JSON(http.StatusConflict, gin.H{
 			"error": "Username already exists",
@@ -216,8 +226,8 @@ func (h *AuthHandler) RefreshToken(c *gin.Context) {
 	// TODO: Тут буде логіка отримання користувача з бази даних за ID з claims
 	// Поки що використовуємо заглушку
 	userID := uint(1)
-	username := "admin"
-	email := "admin@example.com"
+	username := adminUsername
+	email := adminEmail
 
 	// Генеруємо нові токени
 	tokenPair, err := h.jwtService.RefreshTokens(req.RefreshToken, userID, username, email)

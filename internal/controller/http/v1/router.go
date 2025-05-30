@@ -22,7 +22,12 @@ func NewTranslationRoutes(apiV1Group *gin.RouterGroup, jwtService *services.JWTS
 	}
 }
 
-func NewAuthRoutes(apiV1Group *gin.RouterGroup, jwtService *services.JWTService, userService *services.UserService, l logger.Interface) {
+func NewAuthRoutes(
+	apiV1Group *gin.RouterGroup,
+	jwtService *services.JWTService,
+	userService *services.UserService,
+	l logger.Interface,
+) {
 
 	authHandler := NewAuthHandler(jwtService, userService, l)
 

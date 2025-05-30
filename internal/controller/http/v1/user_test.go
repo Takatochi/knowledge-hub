@@ -95,7 +95,11 @@ func TestUserHandler_GetUser(t *testing.T) {
 			// Тут можна використовувати більш складну логіку порівняння
 			if tt.wantStatus == http.StatusOK {
 				if data, ok := response["data"].(map[string]interface{}); ok {
-					expectedData := tt.wantResponse["data"].(map[string]interface{})
+					expectedData, ok := tt.wantResponse["data"].(map[string]interface{})
+					if !ok {
+						t.Errorf("Expected data is not a map[string]interface{}")
+						return
+					}
 					if data["id"] != expectedData["id"] ||
 						data["username"] != expectedData["username"] ||
 						data["email"] != expectedData["email"] {

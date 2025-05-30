@@ -1,9 +1,15 @@
 package services
 
 import (
-	"KnowledgeHub/config"
 	"testing"
 	"time"
+
+	"KnowledgeHub/config"
+)
+
+const (
+	testUsername = "testuser"
+	testEmail    = "test@example.com"
 )
 
 func getTestConfig() *config.Config {
@@ -22,8 +28,8 @@ func TestJWTService_GenerateTokenPair(t *testing.T) {
 	jwtService := NewJWTService(cfg)
 
 	userID := uint(1)
-	username := "testuser"
-	email := "test@example.com"
+	username := testUsername
+	email := testEmail
 
 	tokenPair, err := jwtService.GenerateTokenPair(userID, username, email)
 	if err != nil {
@@ -57,8 +63,8 @@ func TestJWTService_ValidateAccessToken(t *testing.T) {
 	jwtService := NewJWTService(cfg)
 
 	userID := uint(1)
-	username := "testuser"
-	email := "test@example.com"
+	username := testUsername
+	email := testEmail
 
 	// Генеруємо токен
 	tokenPair, err := jwtService.GenerateTokenPair(userID, username, email)
@@ -109,8 +115,8 @@ func TestJWTService_ValidateRefreshToken(t *testing.T) {
 	jwtService := NewJWTService(cfg)
 
 	userID := uint(1)
-	username := "testuser"
-	email := "test@example.com"
+	username := testUsername
+	email := testEmail
 
 	// Генеруємо токен
 	tokenPair, err := jwtService.GenerateTokenPair(userID, username, email)
@@ -138,8 +144,8 @@ func TestJWTService_RefreshTokens(t *testing.T) {
 	jwtService := NewJWTService(cfg)
 
 	userID := uint(1)
-	username := "testuser"
-	email := "test@example.com"
+	username := testUsername
+	email := testEmail
 
 	// Генеруємо початкову пару токенів
 	originalTokenPair, err := jwtService.GenerateTokenPair(userID, username, email)
@@ -250,8 +256,8 @@ func TestJWTService_ExpiredToken(t *testing.T) {
 	jwtService := NewJWTService(cfg)
 
 	userID := uint(1)
-	username := "testuser"
-	email := "test@example.com"
+	username := testUsername
+	email := testEmail
 
 	// Генеруємо токен (він буде вже прострочений)
 	tokenPair, err := jwtService.GenerateTokenPair(userID, username, email)
