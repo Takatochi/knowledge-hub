@@ -42,12 +42,11 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    # Пропускаємо лінтер поки що
-    # - name: Run linter
-    #   uses: golangci/golangci-lint-action@v3
-    #   with:
-    #     version: latest
-    #     args: --timeout=5m --out-format=colored-line-number
+    - name: Run linter
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        args: --timeout=5m --out-format=colored-line-number
 
     - name: Run unit tests
       run: go test -v ./internal/services/... ./internal/repo/mocks/... ./internal/controller/http/...
