@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"KnowledgeHub/config"
@@ -71,6 +72,7 @@ func (j *JWTService) generateAccessToken(userID uint, username, email string) (s
 			NotBefore: jwt.NewNumericDate(now),
 			Issuer:    "KnowledgeHub",
 			Subject:   "access_token",
+			ID:        fmt.Sprintf("access_%d_%d", userID, now.UnixNano()),
 		},
 	}
 
@@ -93,7 +95,7 @@ func (j *JWTService) generateRefreshToken(userID uint) (string, error) {
 		NotBefore: jwt.NewNumericDate(now),
 		Issuer:    "KnowledgeHub",
 		Subject:   "refresh_token",
-		ID:        string(rune(userID)),
+		ID:        fmt.Sprintf("%d_%d", userID, now.UnixNano()),
 	}
 
 	token := jwt.NewWithClaims(jwt.GetSigningMethod(j.config.JWT.SigningAlgorithm), claims)
@@ -133,7 +135,6 @@ func (j *JWTService) ValidateAccessToken(tokenString string) (*JWTClaims, error)
 	return claims, nil
 }
 
-// ValidateRefreshToken валідує refresh токен
 func (j *JWTService) ValidateRefreshToken(tokenString string) (*jwt.RegisteredClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
 

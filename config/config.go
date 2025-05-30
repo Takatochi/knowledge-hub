@@ -14,6 +14,7 @@ type (
 		PG      PG
 		Metrics Metrics
 		Swagger Swagger
+		JWT     JWT
 	}
 
 	App struct {
@@ -41,6 +42,13 @@ type (
 
 	Swagger struct {
 		Enabled bool `env:"SWAGGER_ENABLED" envDefault:"false"`
+	}
+
+	JWT struct {
+		Secret           string `env:"JWT_SECRET,required"`
+		AccessTokenTTL   int    `env:"JWT_ACCESS_TOKEN_TTL" envDefault:"900"`     // 15 хвилин в секундах
+		RefreshTokenTTL  int    `env:"JWT_REFRESH_TOKEN_TTL" envDefault:"604800"` // 7 днів в секундах
+		SigningAlgorithm string `env:"JWT_SIGNING_ALGORITHM" envDefault:"HS256"`
 	}
 )
 

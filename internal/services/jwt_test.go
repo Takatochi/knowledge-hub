@@ -10,8 +10,8 @@ func getTestConfig() *config.Config {
 	return &config.Config{
 		JWT: config.JWT{
 			Secret:           "test_secret_key_for_testing_purposes_only",
-			AccessTokenTTL:   900,    // 15 хвилин
-			RefreshTokenTTL:  604800, // 7 днів
+			AccessTokenTTL:   900,
+			RefreshTokenTTL:  604800,
 			SigningAlgorithm: "HS256",
 		},
 	}
@@ -146,6 +146,9 @@ func TestJWTService_RefreshTokens(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to generate token pair: %v", err)
 	}
+
+	// Додаємо невелику затримку для забезпечення різних timestamp
+	time.Sleep(time.Millisecond)
 
 	// Оновлюємо токени
 	newTokenPair, err := jwtService.RefreshTokens(originalTokenPair.RefreshToken, userID, username, email)
