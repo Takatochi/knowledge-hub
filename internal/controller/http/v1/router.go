@@ -12,11 +12,11 @@ import (
 )
 
 // NewTranslationRoutes -.
-func NewTranslationRoutes(apiV1Group *gin.RouterGroup, l logger.Interface) {
+func NewTranslationRoutes(apiV1Group *gin.RouterGroup, jwtService *services.JWTService, l logger.Interface) {
 	r := &V1{l: l, v: validator.New(validator.WithRequiredStructEnabled())}
 
 	translationGroup := apiV1Group.Group("/translation")
-
+	translationGroup.Use(middleware.OptionalJWTAuthMiddleware(jwtService, l))
 	{
 		translationGroup.GET("/history", r.history)
 	}
@@ -25,7 +25,7 @@ func NewTranslationRoutes(apiV1Group *gin.RouterGroup, l logger.Interface) {
 func NewAuthRoutes(apiV1Group *gin.RouterGroup, jwtService *services.JWTService, userService *services.UserService, l logger.Interface) {
 
 	authHandler := NewAuthHandler(jwtService, userService, l)
-	// Публічні роути (без аутентифікації)
+
 	authGroup := apiV1Group.Group("/auth")
 	{
 		authGroup.POST("/login", authHandler.Login)
@@ -33,7 +33,6 @@ func NewAuthRoutes(apiV1Group *gin.RouterGroup, jwtService *services.JWTService,
 		authGroup.POST("/refresh", authHandler.RefreshToken)
 	}
 
-	// Захищені роути (з обов'язковою аутентифікацією)
 	protectedAuthGroup := apiV1Group.Group("/auth")
 	protectedAuthGroup.Use(middleware.JWTAuthMiddleware(jwtService, l))
 	{

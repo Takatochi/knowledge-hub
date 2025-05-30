@@ -62,6 +62,11 @@ type RefreshRequest struct {
 	RefreshToken string `json:"refresh_token" binding:"required" example:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."`
 }
 
+// ErrorResponse представляє структуру помилки
+type ErrorResponse struct {
+	Error string `json:"error" example:"Invalid request"`
+}
+
 // Login godoc
 // @Summary      User login
 // @Description  Authenticate user and return JWT tokens
@@ -71,9 +76,9 @@ type RefreshRequest struct {
 // @Produce      json
 // @Param        request body LoginRequest true "Login credentials"
 // @Success      200 {object} AuthResponse
-// @Failure      400 {object} gin.H
-// @Failure      401 {object} gin.H
-// @Failure      500 {object} gin.H
+// @Failure      400 {object} ErrorResponse
+// @Failure      401 {object} ErrorResponse
+// @Failure      500 {object} ErrorResponse
 // @Router       /auth/login [post]
 func (h *AuthHandler) Login(c *gin.Context) {
 	var req LoginRequest
@@ -127,9 +132,9 @@ func (h *AuthHandler) Login(c *gin.Context) {
 // @Produce      json
 // @Param        request body RegisterRequest true "Registration data"
 // @Success      201 {object} AuthResponse
-// @Failure      400 {object} gin.H
-// @Failure      409 {object} gin.H
-// @Failure      500 {object} gin.H
+// @Failure      400 {object} ErrorResponse
+// @Failure      409 {object} ErrorResponse
+// @Failure      500 {object} ErrorResponse
 // @Router       /auth/register [post]
 func (h *AuthHandler) Register(c *gin.Context) {
 	var req RegisterRequest
@@ -184,9 +189,9 @@ func (h *AuthHandler) Register(c *gin.Context) {
 // @Produce      json
 // @Param        request body RefreshRequest true "Refresh token"
 // @Success      200 {object} AuthResponse
-// @Failure      400 {object} gin.H
-// @Failure      401 {object} gin.H
-// @Failure      500 {object} gin.H
+// @Failure      400 {object} ErrorResponse
+// @Failure      401 {object} ErrorResponse
+// @Failure      500 {object} ErrorResponse
 // @Router       /auth/refresh [post]
 func (h *AuthHandler) RefreshToken(c *gin.Context) {
 	var req RefreshRequest
@@ -238,6 +243,11 @@ func (h *AuthHandler) RefreshToken(c *gin.Context) {
 	})
 }
 
+// MessageResponse представляє відповідь з повідомленням
+type MessageResponse struct {
+	Message string `json:"message" example:"Successfully logged out"`
+}
+
 // Logout godoc
 // @Summary      User logout
 // @Description  Logout user (invalidate tokens on client side)
@@ -246,8 +256,8 @@ func (h *AuthHandler) RefreshToken(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Security     BearerAuth
-// @Success      200 {object} gin.H
-// @Failure      401 {object} gin.H
+// @Success      200 {object} MessageResponse
+// @Failure      401 {object} ErrorResponse
 // @Router       /auth/logout [post]
 func (h *AuthHandler) Logout(c *gin.Context) {
 	// Отримуємо інформацію про користувача з контексту
@@ -261,8 +271,8 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 	// В JWT архітектурі logout зазвичай обробляється на клієнті
 	// шляхом видалення токенів з локального сховища
 	// Для серверного logout можна використовувати blacklist токенів
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Successfully logged out",
+	c.JSON(http.StatusOK, MessageResponse{
+		Message: "Successfully logged out",
 	})
 }
 
@@ -275,7 +285,7 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 // @Produce      json
 // @Security     BearerAuth
 // @Success      200 {object} UserInfo
-// @Failure      401 {object} gin.H
+// @Failure      401 {object} ErrorResponse
 // @Router       /auth/me [get]
 func (h *AuthHandler) Me(c *gin.Context) {
 
