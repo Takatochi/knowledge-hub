@@ -46,8 +46,8 @@ type (
 
 	JWT struct {
 		Secret           string `env:"JWT_SECRET,required"`
-		AccessTokenTTL   int    `env:"JWT_ACCESS_TOKEN_TTL" envDefault:"900"`     // 15 хвилин в секундах
-		RefreshTokenTTL  int    `env:"JWT_REFRESH_TOKEN_TTL" envDefault:"604800"` // 7 днів в секундах
+		AccessTokenTTL   int    `env:"JWT_ACCESS_TOKEN_TTL" envDefault:"900"`
+		RefreshTokenTTL  int    `env:"JWT_REFRESH_TOKEN_TTL" envDefault:"604800"`
 		SigningAlgorithm string `env:"JWT_SIGNING_ALGORITHM" envDefault:"HS256"`
 	}
 )

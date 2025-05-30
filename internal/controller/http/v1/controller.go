@@ -28,7 +28,6 @@ type V1 struct {
 // @Failure     500 {object} response.Error
 // @Router      /translation/history [get]
 func (r *V1) history(ctx *gin.Context) {
-	// Використовуємо іменовані поля
 	ctx.JSON(http.StatusOK, gin.H{
 		"data": models.Entity{Message: "Server is running"},
 	})
