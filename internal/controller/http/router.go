@@ -24,8 +24,9 @@ import (
 // @BasePath    /v1
 func NewRouter(engine *gin.Engine, cfg *config.Config, l logger.Interface) {
 	// Middleware
-	engine.Use(middleware.Logger(l))
-	engine.Use(middleware.Recovery(l))
+	engine.Use(middleware.LoggerMiddleware(l))
+	engine.Use(middleware.RecoveryMiddleware(l))
+	engine.Use(middleware.RecoveryMiddleware(l))
 
 	//// Swagger
 	if cfg.Swagger.Enabled {

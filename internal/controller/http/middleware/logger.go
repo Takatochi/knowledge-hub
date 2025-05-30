@@ -25,7 +25,7 @@ func buildRequestMessage(ctx *gin.Context, status int, bodySize int) string {
 	return result.String()
 }
 
-func Logger(l logger.Interface) gin.HandlerFunc {
+func LoggerMiddleware(l logger.Interface) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// Перед виконанням основного хендлера
 		ctx.Next()

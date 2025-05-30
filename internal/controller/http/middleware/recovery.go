@@ -25,7 +25,7 @@ func buildPanicMessage(ctx *gin.Context, err interface{}) string {
 	return result.String()
 }
 
-func Recovery(l logger.Interface) gin.HandlerFunc {
+func RecoveryMiddleware(l logger.Interface) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
