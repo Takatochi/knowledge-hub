@@ -16,7 +16,6 @@ const (
 	_defaultConnTimeout  = time.Second
 )
 
-// Postgres -.
 type Postgres struct {
 	maxPoolSize  int
 	connAttempts int
