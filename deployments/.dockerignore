@@ -1,0 +1,16 @@
+.git
+*.log
+*.md
+*.txt
+!../README.md
+LICENSE
+.gitignore
+.idea
+.vscode
+*.test
+tmp/
+test/
+docs/
+examples/
+deployments/
+start.bat
