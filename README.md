@@ -4,13 +4,15 @@ A knowledge management application with RESTful API built using Go.
 
 ## Prerequisites
 
-- Go 1.23+
-- PostgreSQL
+- Go 1.23+ (for local development)
+- PostgreSQL (for local development)
 - Git
+- Docker
+- Docker Compose
 
 ## Getting Started
 
-### Installation
+### Running with Docker
 
 1. Clone the repository:
    ```
@@ -18,25 +20,38 @@ A knowledge management application with RESTful API built using Go.
    cd KnowledgeHub
    ```
 
-2. Install dependencies:
-   ```
-   go mod download
-   ```
-
-3. Set up environment variables:
+2. Set up environment variables:
    ```
    cp .env.example .env
    ```
    Edit the `.env` file with your configuration.
 
-### Running the Application
+3. Run the application using one of the following methods:
 
-1. Start the server:
+   a) Using batch file (Windows):
+   ```
+   ./start.bat up -d
+   ```
+
+   b) Using Docker Compose directly:
+   ```
+   cd deployments
+   docker-compose up -d
+   ```
+
+4. The API will be available at `http://localhost:8080`
+
+### Local Development
+
+1. Install dependencies:
+   ```
+   go mod download
+   ```
+
+2. Start the server:
    ```
    go run cmd/main.go
    ```
-
-2. The API will be available at `http://localhost:8080`
 
 ## API Documentation with Swagger
 
@@ -55,5 +70,3 @@ A knowledge management application with RESTful API built using Go.
 3. Make sure `SWAGGER_ENABLED=true` is set in your `.env` file.
 
 4. Access Swagger UI at `http://localhost:8080/swagger/index.html`
-
-### Updating Swagger Documentation
