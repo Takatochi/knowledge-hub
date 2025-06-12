@@ -1,3 +1,3 @@
 @echo off
 cd %~dp0\deployments
-docker-compose --env-file ..\.env %*
+docker-compose -p knowledge-hub --env-file ..\.env %*

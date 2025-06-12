@@ -5,7 +5,10 @@ services:
     build:
       context: ..
       dockerfile: deployments/Dockerfile
-    container_name: knowledge-hub-api
+      args:
+        - APP_VERSION=${APP_VERSION}
+#    image: ${DOCKER_USERNAME}/${APP_NAME}:${APP_VERSION}
+    container_name: ${APP_NAME}-api
     restart: always
     ports:
       - "8080:${HTTP_PORT}"
